@@ -130,7 +130,7 @@ body {
         <div>
             <div class="quotation-title">Quotation</div>
             <div class="header-info">
-                Date: ${quotation?.created_at ? new Date(quotation.created_at).toLocaleDateString('en-GB') : 'N/A'}<br>
+                Date: ${new Date(quotation?.created_at || Date.now()).toLocaleDateString('en-GB')}<br>
                 Quotation #: ${quotation?.quotation_number || 'N/A'}
             </div>
         </div>
@@ -182,12 +182,13 @@ body {
     <!-- FOOTER -->
     <div class="footer">
         <div class="notes">
+            ${quotation?.notes || quotation?.terms || quotation?.tax_rate > 0 || quotation?.discount > 0 ? `
             <strong>Additional Notes:</strong><br>
             ${quotation?.notes ? quotation.notes.replace(/\n/g, '<br>') + '<br>' : ''}
             ${quotation?.terms ? quotation.terms.replace(/\n/g, '<br>') + '<br>' : ''}
             ${quotation?.tax_rate > 0 ? `• ${quotation.tax_rate}% Tax will be applied.<br>` : ''}
             ${quotation?.discount > 0 ? `• Discount of LKR ${Number(quotation.discount).toLocaleString('en-LK', { minimumFractionDigits: 2 })} has been applied.<br>` : ''}
-            <br>
+            <br>` : ''}
             Thank you.
         </div>
 
