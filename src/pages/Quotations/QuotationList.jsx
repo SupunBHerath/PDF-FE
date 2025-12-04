@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { quotationAPI } from '@/api';
 import useAuthStore from '@/store/authStore';
 import dayjs from 'dayjs';
+import { generateQuotationPDF } from '@/utils/pdfGenerator';
 
 const { Search } = Input;
 
@@ -63,15 +64,21 @@ const QuotationList = () => {
         deleteMutation.mutate(record.id);
     };
 
-    // ↓↓↓ FIXED PDF DOWNLOAD HANDLER ↓↓↓
-    const handleDownload = (quotationId, quotationNumber) => {
-        const url = `http://localhost:5000/api/quotations/${quotationId}/pdf`;
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.target = '_blank';
-        link.download = `${quotationNumber}.pdf`;
-        link.click();
+    // ↓↓↓ CLIENT-SIDE PDF GENERATION ↓↓↓
+    const handleDownload = async (quotationId, quotationNumber) => {
+        try {
+            // Fetch the full quotation details
+            const quotationData = await quotationAPI.getOne(quotationId);
+            const quotation = quotationData.data;
+            
+            // Generate PDF on the client side
+            generateQuotationPDF(quotation, quotation.company);
+            
+            message.success('PDF generated successfully');
+        } catch (error) {
+            message.error('Failed to generate PDF');
+            console.error('PDF generation error:', error);
+        }
     };
 
     const columns = [
