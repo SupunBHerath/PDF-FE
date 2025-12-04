@@ -1,0 +1,39 @@
+.auth-layout {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.auth-content {
+    padding: 20px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 24px;
+    color: white;
+}
+
+.auth-logo {
+    font-size: 64px;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.auth-card {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
