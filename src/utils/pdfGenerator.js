@@ -16,7 +16,7 @@ body {
     padding: 20px 25px 140px 25px;
     box-sizing: border-box;
     position: relative;
-    min-height: 288mm;
+    min-height: 285mm;
 }
 
 .header-top {
